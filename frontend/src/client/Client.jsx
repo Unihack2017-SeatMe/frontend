@@ -1,9 +1,9 @@
-import { allRoomData, roomData } from '../../shared/socket-keys';
+import { allRoomDataKey, roomDataKey } from '../../shared/socket-keys';
 function setupSocket(socket, mapState) {
-  socket.on(allRoomData, (all_room_data) => {
-    mapState.all_room_state = all_room_data;
+  socket.on(allRoomDataKey, (allRoomData) => {
+    mapState.all_room_state = allRoomData;
   });
-  socket.on(roomData, (data) => {
+  socket.on(roomDataKey, (data) => {
     mapState.addRoomData(data);
   })
 }
