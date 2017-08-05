@@ -1,8 +1,10 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { observer } from 'mobx-react';
 import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';
 
+import PopUp from './PopUp';
 import {mapState} from './shared/state/dummyState';
 @observer
 class FullnessMap extends React.Component {
@@ -16,7 +18,15 @@ class FullnessMap extends React.Component {
     this.tileLayer = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
-    
+
+    this.updatePopUps();
+  }
+
+  componentDidReceiveProps(nextProps) {
+    this.updatePopUps();
+  }
+
+  updatePopUps() {
     geoJSON(mapState.allRoomGeoData, {
       style: (feature) => {
         const {capacity, count} = feature.properties;
@@ -27,9 +37,12 @@ class FullnessMap extends React.Component {
           opacity: 0.65
         }
       }
-    })
-      .bindPopup((layer) => `${layer.feature.properties.capacity}`)
-      .addTo(this.map);
+    }).bindPopup((layer) => {
+      const {capacity, count, name} = layer.feature.properties;
+      const ref = document.createElement('div');
+      ReactDOM.render(<PopUp count={count} capacity={capacity} name={name}/>, ref);
+      return ref;
+    }).addTo(this.map);
   }
 
   render() {
