@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { observer } from 'mobx-react';
 import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';

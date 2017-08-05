@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import  * as React from 'react';
+import  * as ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {App} from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { mapState } from './frontend-state';
 import { setupSocket } from './client/setupSocket';
-import SocketIo from 'socket.io-client';
+import  * as SocketIo from 'socket.io-client';
 setupSocket(SocketIo.connect('http://localhost:8080'), mapState);
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
