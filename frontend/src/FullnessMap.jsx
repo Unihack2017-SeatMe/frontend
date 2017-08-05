@@ -1,7 +1,10 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { tileLayer, map, LatLng} from 'leaflet';
+import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';
+
+import {mapState} from './state/dummyState';
+
 const initialLocation = new LatLng(10, 10);
 @observer
 class FullnessMap extends React.Component {
@@ -10,6 +13,9 @@ class FullnessMap extends React.Component {
     this.tileLayer = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
+
+
+    geoJSON(mapState.all_room_geo_data).addTo(this.map);
   }
   render() {
     return <div className="map-container" ref={(mapContainer) => { this.mapContainer = mapContainer; }}></div>
