@@ -22,7 +22,8 @@ class FullnessMap extends React.Component {
         "weight": 10,
         "opacity": 0.65
     };
-    geoJSON(mapState.all_room_geo_data, {style})
+    console.log(mapState.allRoomGeoData);
+    geoJSON(mapState.allRoomGeoData, {style})
       .bindPopup((layer) => `${layer.feature.properties.capacity}`)
       .addTo(this.map);
   }
