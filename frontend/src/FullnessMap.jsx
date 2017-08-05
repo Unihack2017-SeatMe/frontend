@@ -16,14 +16,18 @@ class FullnessMap extends React.Component {
     this.tileLayer = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
-
-    const style = {
-        "color": "#ff7800",
-        "weight": 10,
-        "opacity": 0.65
-    };
-    console.log(mapState.allRoomGeoData);
-    geoJSON(mapState.allRoomGeoData, {style})
+    
+    geoJSON(mapState.allRoomGeoData, {
+      style: (feature) => {
+        const {capacity, count} = feature.properties;
+        console.log(`rgb(${Math.floor(count / capacity * 255)}, 0, 0)`);
+        return {
+          color: `rgb(${Math.floor(count / capacity * 255)}, 0, 0)`,
+          weight: 10,
+          opacity: 0.65
+        }
+      }
+    })
       .bindPopup((layer) => `${layer.feature.properties.capacity}`)
       .addTo(this.map);
   }
