@@ -1,9 +1,9 @@
 import  * as React from 'react';
 import  * as ReactDOM from 'react-dom';
 import './index.css';
-import {App} from './App';
+import {App} from './view/App';
 import registerServiceWorker from './registerServiceWorker';
-import { mapState } from './frontend-state';
+import { mapState } from './state/frontend-state';
 import { setupSocket } from './client/setupSocket';
 import  * as SocketIo from 'socket.io-client';
 setupSocket(SocketIo.connect('http://localhost:8080'), mapState);

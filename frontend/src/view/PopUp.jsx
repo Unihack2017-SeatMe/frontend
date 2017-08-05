@@ -2,7 +2,7 @@ import * as React from 'react';
 import {observer} from 'mobx-react';
 import './PopUp.css';
 
-import {mapState} from './frontend-state';
+import {mapState} from '../state/frontend-state';
 
 @observer
 export class PopUp extends React.Component {

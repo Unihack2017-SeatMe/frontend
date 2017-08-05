@@ -5,7 +5,7 @@ import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';
 
 import PopUp from './PopUp';
-import {mapState} from './frontend-state';
+import {mapState} from '../state/frontend-state';
 
 @observer
 class FullnessMap extends React.Component {
