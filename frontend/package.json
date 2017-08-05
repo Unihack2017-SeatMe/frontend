@@ -89,10 +89,8 @@
   },
   "babel": {
     "presets": [
-      "react-app"
-    ],
-    "plugins": [
-      "transform-decorators-legacy"
+      "es2017",
+      "transform-react-jsx"
     ]
   },
   "eslintConfig": {
