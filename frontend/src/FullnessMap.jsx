@@ -5,46 +5,45 @@ import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';
 
 import PopUp from './PopUp';
-import {mapState} from './shared/state/appState';
+import {mapState} from './frontend-state';
+
 @observer
 class FullnessMap extends React.Component {
+  constructor(props) {
+    super(props);
+    this.tileLayer = this.tileLayer = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; // TODO</a>'
+    });
+    this.roomLayer = geoJSON([], {
+        style: (feature) => {
+          const {capacity, count} = feature.properties;
+          return {
+            color: `rgb(${Math.floor(count / capacity * 255)}, 0, 0)`,
+            weight: 10,
+            opacity: 0.65
+          }
+        }
+      }).bindPopup((layer) => {
+        const {name, id} = layer.feature.properties;
+        const ref = document.createElement('div');
+        ReactDOM.render(<PopUp id={id} name={name}/>, ref);
+        return ref;
+      })
+  }
+
   componentDidMount() {
     this.map = map(this.mapContainer, {
       center: new LatLng(-37.8163921, 144.9649125),
       zoom: 18,
       maxZoom: 20
     });
-
-    this.tileLayer = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; // TODO</a>'
-    }).addTo(this.map);
-
-  }
-
-  componentDidReceiveProps(nextProps) {
-    this.updatePopUps();
-  }
-
-  updatePopUps() {
-    geoJSON(mapState.allRoomGeoData, {
-      style: (feature) => {
-        const {capacity, count} = feature.properties;
-        console.log(`rgb(${Math.floor(count / capacity * 255)}, 0, 0)`);
-        return {
-          color: `rgb(${Math.floor(count / capacity * 255)}, 0, 0)`,
-          weight: 10,
-          opacity: 0.65
-        }
-      }
-    }).bindPopup((layer) => {
-      const {capacity, count, name} = layer.feature.properties;
-      const ref = document.createElement('div');
-      ReactDOM.render(<PopUp count={count} capacity={capacity} name={name}/>, ref);
-      return ref;
-    }).addTo(this.map);
+    this.tileLayer.addTo(this.map);
+    this.roomLayer.addTo(this.map);
   }
 
   render() {
+    this.roomLayer.clearLayers();
+    this.roomLayer.addData(mapState.allRoomGeoData);
     return (
       <div
         className="map-container"

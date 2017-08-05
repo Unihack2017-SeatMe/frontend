@@ -1,14 +1,14 @@
 import React from 'react';
+import {observer} from 'mobx-react';
 import './PopUp.css';
 
+import {mapState} from './frontend-state';
+
+@observer
 export class PopUp extends React.Component {
-
-  renderHTML() {
-    
-  }
-
   render() {
-    const {name, count, capacity} = this.props;
+    const {name, id} = this.props;
+    const {count, capacity} = mapState.allRoomData.get(id);
     return (
       <div>
         <div>{`name: ${name}`}</div>
