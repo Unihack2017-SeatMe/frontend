@@ -86,7 +86,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     // `web` extension prefixes have been added for better support
     // for React Native Web.
-    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
+    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx', '.ts', '.tsx'],
     alias: {
       
       // Support React Native Web
@@ -130,14 +130,14 @@ module.exports = {
       // The `exclude` list *must* be updated with every change to loader extensions.
       // When adding a new loader, you must add its `test`
       // as a new entry in the `exclude` list for "file" loader.
-
       // "file" loader makes sure those assets get served by WebpackDevServer.
+
       // When you `import` an asset, you get its (virtual) filename.
       // In production, they would get copied to the `build` folder.
       {
         exclude: [
           /\.html$/,
-          /\.(js|jsx)$/,
+          /\.(js|jsx|ts|tsx)$/,
           /\.css$/,
           /\.json$/,
           /\.bmp$/,
@@ -163,16 +163,25 @@ module.exports = {
       },
       // Process JS with Babel.
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         include: paths.appSrc,
-        loader: require.resolve('babel-loader'),
-        options: {
-          
-          // This is a feature of `babel-loader` for webpack (not Babel itself).
-          // It enables caching results in ./node_modules/.cache/babel-loader/
-          // directory for faster rebuilds.
-          cacheDirectory: true,
-        },
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {          
+              // This is a feature of `babel-loader` for webpack (not Babel itself).
+              // It enables caching results in ./node_modules/.cache/babel-loader/
+              // directory for faster rebuilds.
+              cacheDirectory: true,
+            }
+          },
+          {
+            loader: require.resolve('awesome-typescript-loader'),
+            options: {
+              useBabel: true
+            }
+          }
+        ]
       },
       // "postcss" loader applies autoprefixer to our CSS.
       // "css" loader resolves paths in CSS and adds assets as dependencies.

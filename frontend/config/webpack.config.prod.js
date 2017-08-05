@@ -86,7 +86,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/290
     // `web` extension prefixes have been added for better support
     // for React Native Web.
-    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx'],
+    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx', '.tsx', '.ts'],
     alias: {
       
       // Support React Native Web
@@ -112,7 +112,7 @@ module.exports = {
       // First, run the linter.
       // It's important to do this before Babel processes the JS.
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         enforce: 'pre',
         use: [
           {
@@ -136,7 +136,7 @@ module.exports = {
       {
         exclude: [
           /\.html$/,
-          /\.(js|jsx)$/,
+          /\.(js|jsx|ts|tsx)$/,
           /\.css$/,
           /\.json$/,
           /\.bmp$/,
@@ -161,13 +161,22 @@ module.exports = {
       },
       // Process JS with Babel.
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         include: paths.appSrc,
-        loader: require.resolve('babel-loader'),
-        options: {
-          
-          compact: true,
-        },
+        use: [
+          {
+            loader: require.resolve('babel-loader'),
+            options: {
+              compact: true,
+            }
+          },
+          {
+            loader: require.resolve('awesome-typescript-loader'),
+            options: {
+              useBabel: true
+            }
+          },
+        ]
       },
       // The notation here is somewhat confusing.
       // "postcss" loader applies autoprefixer to our CSS.

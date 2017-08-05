@@ -1,3 +1,9 @@
-[submodule "frontend/shared"]
-	path = frontend/shared
+[submodule "shared"]
+	path = shared
+	url = https://github.com/Unihack2017/shared
+[submodule "frontend/src/shared"]
+	path = frontend/src/shared
 	url = https://github.com/Unihack2017/shared.git
+[submodule "frontend/src/wtf-material"]
+	path = frontend/src/wtf-material
+	url = https://github.com/PatrickShaw/wtf-material.git
