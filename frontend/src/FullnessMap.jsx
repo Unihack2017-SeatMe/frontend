@@ -12,6 +12,7 @@ class FullnessMap extends React.Component {
       zoom: 18,
       maxZoom: 20
     });
+
     this.tileLayer = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
@@ -21,8 +22,9 @@ class FullnessMap extends React.Component {
         "weight": 10,
         "opacity": 0.65
     };
-    geoJSON(mapState.all_room_geo_data.values(), {style})
-      .bindPopup((layer) => `${layer.feature.properties.fullness}`)
+    console.log(mapState.allRoomGeoData);
+    geoJSON(mapState.allRoomGeoData, {style})
+      .bindPopup((layer) => `${layer.feature.properties.capacity}`)
       .addTo(this.map);
   }
 
