@@ -19,11 +19,12 @@ class MapState {
     return this.all_room_data.map(({id, fullness}) => ({
       type: 'Feature',
       properties: {
-        name: LOCATIONS[id].name
+        name: LOCATIONS[id].name,
+        fullness
       },
       geometry: {
         type: 'Polygon',
-        coordinates: LOCATIONS[id].coordinates
+        coordinates: [LOCATIONS[id].coordinates]
       }
     }));
   }

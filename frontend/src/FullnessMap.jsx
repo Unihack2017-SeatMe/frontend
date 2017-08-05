@@ -5,20 +5,36 @@ import './FullnessMap.css';
 
 import {mapState} from './state/dummyState';
 
-const initialLocation = new LatLng(10, 10);
 @observer
 class FullnessMap extends React.Component {
   componentDidMount() {
-    this.map = map(this.mapContainer).setView(initialLocation, 13);
+    this.map = map(this.mapContainer, {
+      center: new LatLng(-37.8163921, 144.9649125),
+      zoom: 18,
+      maxZoom: 20
+    });
     this.tileLayer = tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
 
-
-    geoJSON(mapState.all_room_geo_data).addTo(this.map);
+    const style = {
+        "color": "#ff7800",
+        "weight": 10,
+        "opacity": 0.65
+    };
+    geoJSON(mapState.all_room_geo_data[0], {style})
+      .bindPopup((layer) => `${layer.feature.properties.fullness}`)
+      .addTo(this.map);
   }
+
   render() {
-    return <div className="map-container" ref={(mapContainer) => { this.mapContainer = mapContainer; }}></div>
+    return (
+      <div
+        className="map-container"
+        ref={(mapContainer) => { this.mapContainer = mapContainer; }}
+      >
+      </div>
+    );
   }
 }
 export default FullnessMap;
