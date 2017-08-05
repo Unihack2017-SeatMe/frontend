@@ -19,14 +19,6 @@ class FullnessMap extends React.Component {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
 
-    this.updatePopUps();
-  }
-
-  componentDidReceiveProps(nextProps) {
-    this.updatePopUps();
-  }
-
-  updatePopUps() {
     geoJSON(mapState.allRoomGeoData, {
       style: (feature) => {
         const {capacity, count} = feature.properties;
@@ -38,9 +30,9 @@ class FullnessMap extends React.Component {
         }
       }
     }).bindPopup((layer) => {
-      const {capacity, count, name} = layer.feature.properties;
+      const {name, id} = layer.feature.properties;
       const ref = document.createElement('div');
-      ReactDOM.render(<PopUp count={count} capacity={capacity} name={name}/>, ref);
+      ReactDOM.render(<PopUp id={id} name={name}/>, ref);
       return ref;
     }).addTo(this.map);
   }
