@@ -1,4 +1,3 @@
-import SocketIo from 'socket.io-client';
 import { allRoomData, roomData } from '../../shared/socket-keys';
 function setupSocket(socket, mapState) {
   socket.on(allRoomData, (all_room_data) => {
