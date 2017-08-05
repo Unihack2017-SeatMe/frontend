@@ -5,7 +5,8 @@ import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';
 
 import PopUp from './PopUp';
-import {mapState} from './shared/state/appState';
+import {mapState} from './frontend-state';
+
 @observer
 class FullnessMap extends React.Component {
   componentDidMount() {
@@ -19,10 +20,10 @@ class FullnessMap extends React.Component {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
 
+    console.log(mapState.allRoomData);
     geoJSON(mapState.allRoomGeoData, {
       style: (feature) => {
         const {capacity, count} = feature.properties;
-        console.log(`rgb(${Math.floor(count / capacity * 255)}, 0, 0)`);
         return {
           color: `rgb(${Math.floor(count / capacity * 255)}, 0, 0)`,
           weight: 10,
