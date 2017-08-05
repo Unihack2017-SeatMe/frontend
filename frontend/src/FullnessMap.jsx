@@ -5,7 +5,7 @@ import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';
 
 import PopUp from './PopUp';
-import {mapState} from './shared/state/dummyState';
+import {mapState} from './shared/state/appState';
 @observer
 class FullnessMap extends React.Component {
   componentDidMount() {
@@ -19,7 +19,6 @@ class FullnessMap extends React.Component {
         attribution: '&copy; // TODO</a>'
     }).addTo(this.map);
 
-    this.updatePopUps();
   }
 
   componentDidReceiveProps(nextProps) {
