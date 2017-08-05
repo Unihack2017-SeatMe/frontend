@@ -1,3 +1,3 @@
-import { mapState } from '../shared/state/appState';
+import { mapState } from '../shared/state/dummyState';
 export {mapState};
 export default mapState;

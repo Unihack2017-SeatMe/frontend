@@ -1,11 +1,13 @@
-import  * as React from 'react';
-import  * as ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import * as injectTapEventPlugin from 'react-tap-event-plugin';
 import './index.css';
 import {App} from './view/App';
 import registerServiceWorker from './registerServiceWorker';
 import { mapState } from './state/frontend-state';
 import { setupSocket } from './client/setupSocket';
-import  * as SocketIo from 'socket.io-client';
+import * as SocketIo from 'socket.io-client';
+injectTapEventPlugin();
 setupSocket(SocketIo.connect('http://localhost:8080'), mapState);
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 registerServiceWorker();
