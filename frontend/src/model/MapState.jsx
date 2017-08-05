@@ -1,5 +1,5 @@
 import { observable, computed } from 'mobx';
-import LOCATIONS from './LOCATIONS';
+import {LOCATIONS} from '../config';
 
 class MapState {
   @observable
