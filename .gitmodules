@@ -1,3 +1,6 @@
 [submodule "shared"]
 	path = shared
 	url = https://github.com/Unihack2017/shared
+[submodule "frontend/src/shared"]
+	path = frontend/src/shared
+	url = https://github.com/Unihack2017/shared.git

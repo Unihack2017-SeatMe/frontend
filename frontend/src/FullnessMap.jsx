@@ -3,8 +3,7 @@ import { observer } from 'mobx-react';
 import { tileLayer, map, LatLng, geoJSON} from 'leaflet';
 import './FullnessMap.css';
 
-import {mapState} from './state/dummyState';
-
+import {mapState} from './shared/state/dummyState';
 @observer
 class FullnessMap extends React.Component {
   componentDidMount() {
@@ -22,7 +21,7 @@ class FullnessMap extends React.Component {
         "weight": 10,
         "opacity": 0.65
     };
-    geoJSON(mapState.all_room_geo_data[0], {style})
+    geoJSON(mapState.all_room_geo_data.values(), {style})
       .bindPopup((layer) => `${layer.feature.properties.fullness}`)
       .addTo(this.map);
   }
