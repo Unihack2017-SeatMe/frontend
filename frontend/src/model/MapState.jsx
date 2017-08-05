@@ -6,9 +6,14 @@ class MapState {
     this.all_room_state = initial_room_data;
   }
 
+  @action
+  addRoomData(roomData) {
+    this.all_room_state.set(roomData.id, roomData);
+  }
+
   @computed
   get all_room_data() {
-    return all_room_data;
+    return all_room_state;
   }
 }
 export { MapState };
