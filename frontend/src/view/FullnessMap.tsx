@@ -15,7 +15,7 @@ class FullnessMap extends React.Component {
     super(props);
     this.tileLayer = this.tileLayer = tileLayer(
       'http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; // TODO</a>'
+        attribution: '&copy; Seat.Me</a>'
       }
     );
     this.roomLayer = geoJSON([], {
@@ -28,9 +28,8 @@ class FullnessMap extends React.Component {
           }
         } 
       }).bindPopup((layer) => {
-        const {name, id} = layer.feature.properties;
         const ref = document.createElement('div');
-        ReactDOM.render(<PopUp id={id}/>, ref);
+        ReactDOM.render(<PopUp id={layer.feature.properties.id}/>, ref);
         return ref;
       })
   }

@@ -7,9 +7,9 @@ const PopUp = observer(({id}) => {
   const roomData = mapState.allRoomState.get(id);
   return (
     <div>
-      <h1><strong>{`name: ${roomData.roomName}`}</strong></h1>
-      <div>{`count: ${roomData.count}`}</div>
-      <div>{`capacity: ${roomData.capacity}` }</div>
+      <h1 className="popup-heading">{roomData.roomName}</h1>
+      <p className="popup-detail"><strong>No. People: </strong>{roomData.count}</p>
+      <p className="popup-detail"><strong>Capacity: </strong>{roomData.capacity}</p>
     </div>
   );
 });
