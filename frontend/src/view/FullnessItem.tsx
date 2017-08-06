@@ -12,7 +12,7 @@ const FullnessItem = observer(({ id }) => {
     <ListItem 
       leftAvatar={<Avatar backgroundColor={roomData.fullnessColor}/>}
       primaryText={roomData.roomName}
-      secondaryText={`${(roomData.fullness * 100).toFixed(2)}% full `}//(${roomData.count.toFixed(0)}/${roomData.capacity.toFixed(0)})`}
+      secondaryText={`${(roomData.fullness * 100).toFixed(2)}% full (${roomData.count.toFixed(0)}/${roomData.capacity.toFixed(0)})`}
     />
   );
 });
